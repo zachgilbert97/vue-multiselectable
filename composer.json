@@ -1,0 +1,18 @@
+{
+    "name": "zachgilbert/laravel-vue-multiselect",
+    "description": "Laravel support for vue-multiselect",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zach Gilbert",
+            "email": "zilberdev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Zachgilbert\\LaravelVueMultiselect\\": "src/"
+        }
+    },
+    "require": {}
+}
