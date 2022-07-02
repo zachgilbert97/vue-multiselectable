@@ -28,7 +28,7 @@ class CollectionProvider extends ServiceProvider
     protected function configureCollectionMacros(): void
     {
         $this->multiselectMacro();
-        $this->disabledByMacro();
+        $this->disableOptionsByMacro();
     }
 
     /**
@@ -79,10 +79,10 @@ class CollectionProvider extends ServiceProvider
     /**
      * @return void
      */
-    protected function disabledByMacro(): void
+    protected function disableOptionsByMacro(): void
     {
-        if (!method_exists(Collection::class, 'disabledBy')) {
-            Collection::macro('disabledBy',
+        if (!method_exists(Collection::class, 'disableOptionsBy')) {
+            Collection::macro('disableOptionsBy',
                 function (callable $callback = null) {
                     return $this->map(function ($item, $key) use ($callback) {
                         if ($callback) {

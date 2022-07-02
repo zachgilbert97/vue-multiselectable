@@ -7,9 +7,9 @@ namespace Zachgilbert\LaravelVueMultiselect\Traits;
  *
  * @package Zachgilbert\LaravelVueMultiselect\Traits
  */
-trait VueMultiselectable
+trait Multiselectable
 {
-    public function toMultipleSelect()
+    public function toMultiselectOption()
     {
         //
     }

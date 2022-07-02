@@ -5,8 +5,8 @@ This package contains a set of collection methods to easily prepare data for the
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Collection Methods](#collection-methods)
-    - 3.1. [`vueMultiselect()`](#collection-methods.vue-multiselect)
-    - 3.2. [`disbaledBy()`](#collection-methods.disabled-by)
+    - 3.1. [`multiselect()`](#collection-methods.multiselect)
+    - 3.2. [`disbaleOptionsBy()`](#collection-methods.disable-options-by)
 4. [Query Builder Methods](#query-builder-methods)
 
 ## <a name="installation"># 1.</a> Installation
@@ -32,9 +32,9 @@ return [
 
 ## <a name="collection-methods"># 3.</a> Collection Methods
 
-### <a name="collection-methods.vue-multiselect"># 3.1.</a> `vueMultiselect()`
+### <a name="collection-methods.vue-multiselect"># 3.1.</a> `multiselect()`
 
-The `vueMultiselect` method plucks values form a collection and returns JSON for the `vue-multiselect` options.
+The `multiselect` method plucks values form a collection and returns JSON for the `vue-multiselect` options.
 
 #### Arguments
 ##### `$trackByAttribute (string, 'id')`
@@ -45,7 +45,7 @@ Note that if this is the only argument provided, a JSON array of values will be 
 ```PHP
 <?php
 
-$options = $collection->vueMultiselect('name');
+$options = $collection->multiselect('name');
 
 // '["John Smith", "Jane Doe"]'
 ```
@@ -62,7 +62,7 @@ A second argument `$labelAttribute` determines the attribute from each collectio
 ```PHP
 <?php
 
-$options = $collection->vueMultiselect('id', 'name');
+$options = $collection->multiselect('id', 'name');
 
 // [
 //     {"value": "1", "label": "John Smith"},
@@ -82,7 +82,7 @@ By default, `vue-multiselect` assumes the value on each item in the JSON will be
 ```PHP
 <?php
 
-$options = $collection->vueMultiselect('id', 'name', 'user_id');
+$options = $collection->multiselect('id', 'name', 'user_id');
 
 // [
 //     {"user_id": "1", "label": "John Smith"},
@@ -103,7 +103,7 @@ By default, `vue-multiselect` assumes the label on each item in the JSON will be
 ```PHP
 <?php
 
-$options = $collection->vueMultiselect('id', 'name', 'user_id', 'full_name');
+$options = $collection->multiselect('id', 'name', 'user_id', 'full_name');
 
 // [
 //     {"user_id": 1, "full_name": "John Smith"},
@@ -117,23 +117,25 @@ $options = $collection->vueMultiselect('id', 'name', 'user_id', 'full_name');
     label="full_name" />
 ```
 
-### <a name="collection-methods.disabled-by"># 3.2.</a> `disbaledBy()`
-The `disabledBy()` method applies `$isDisabled = true` to each item in the collection that passes a given truth test as determined by the callback provided. The collection is then returned.
+### <a name="collection-methods.disable-options-by"># 3.2.</a> `disbaleOptionsBy()`
+The `disableOptionsBy()` method applies `$isDisabled = true` to each item in the collection that passes a given truth test as determined by the callback provided. The collection is then returned.
 
 ```PHP
 <?php
 
-$options = $collection->disabledBy(function ($item, $key) {
+$options = $collection->disableOptionsBy(function ($item, $key) {
     return substr($item->name, 0) === 'John';
 });
 
-$options->vueMultiselect('id', 'name');
+$options->multiselect('id', 'name');
 
 // [
 //     {"value": 1, "label": "John Smith", "$isDisabled": true},
 //     {"value": 2, "label": "Jane Doe"}
 // ]
 ```
+
+> Note that disabling multiselect options is only applicable to object-formatted options in the options array.
 
 ## <a name="query-builder-methods"># 4.</a> Query Builder Methods
 
