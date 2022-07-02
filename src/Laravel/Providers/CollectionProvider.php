@@ -68,8 +68,7 @@ class CollectionProvider extends ServiceProvider
                                 Multiselectable::class
                             );
                         }
-                    )
-                    ->toJson();
+                    );
                 }
             );
         }
@@ -85,9 +84,7 @@ class CollectionProvider extends ServiceProvider
                 function (callable $callback = null) {
                     return $this->map(function ($item, $key) use ($callback) {
                         if ($callback) {
-                            $disabled = $callback($item, $key);
-
-                            if ($disabled) $item->{'$isDisabled'} = $disabled;
+                            $item->{'$isDisabled'} = (bool) $callback($item, $key);
                         }
 
                         return $item;
