@@ -1,14 +1,16 @@
 <?php
 
-namespace Zachgilbert\LaravelVueMultiselect\Providers;
+namespace ZachGilbert\VueMultiselectable\Laravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Collection;
+use ZachGilbert\VueMultiselectable\Exceptions\NotMultiselectableException;
+use ZachGilbert\VueMultiselectable\Traits\Multiselectable;
 
 /**
  * class CollectionProvider
  *
- * @package Zachgilbert\LaravelVueMultiselect\Providers
+ * @package ZachGilbert\VueMultiselectable\Laravel\Providers
  */
 class CollectionProvider extends ServiceProvider
 {
@@ -51,23 +53,20 @@ class CollectionProvider extends ServiceProvider
                             $trackByKey,
                             $labelKey
                         ) {
-                            if (is_null($labelAttribute)) {
-                                return $item->{$trackByAttribute};
+                            if (in_array(Multiselectable::class, class_uses($item))) {
+                                return $item->toMultiselectOption(
+                                    $trackByAttribute,
+                                    $labelAttribute,
+                                    $trackByKey,
+                                    $labelKey
+                                );
                             }
 
-                            if (!$trackByKey) $trackByKey = 'value';
-                            if (!$labelKey) $labelKey = 'label';
-
-                            $option = [
-                                $trackByKey => $item->{$trackByAttribute},
-                                $labelKey => $item->{$labelAttribute},
-                            ];
-
-                            if ($item->{'$isDisabled'}) {
-                                $option['$isDisabled'] = $item->{'$isDisabled'};
-                            }
-
-                            return $option;
+                            throw new NotMultiselectableException(
+                                'Item ' . get_class($item) .
+                                ' does not implement trait ' .
+                                Multiselectable::class
+                            );
                         }
                     )
                     ->toJson();

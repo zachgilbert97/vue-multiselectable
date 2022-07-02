@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
-use Mockery;
 use PHPUnit\Framework\TestCase;
-use Zachgilbert\LaravelVueMultiselect\Providers\CollectionProvider;
+use ZachGilbert\VueMultiselectable\Laravel\Providers\CollectionProvider;
 
 class CollectionProviderTest extends TestCase
 {
@@ -23,7 +22,7 @@ class CollectionProviderTest extends TestCase
 
     function setUpMocks()
     {
-        $this->appMock = Mockery::mock(Application::class);
+        $this->appMock = \Mockery::mock(Application::class);
     }
 
     function test_if_provider_is_constructed()

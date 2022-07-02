@@ -1,6 +1,6 @@
 {
-    "name": "zachgilbert/laravel-vue-multiselect",
-    "description": "Laravel support for vue-multiselect",
+    "name": "zachgilbert/vue-multiselectable",
+    "description": "PHP support for vue-multiselect",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -11,15 +11,26 @@
     ],
     "autoload": {
         "psr-4": {
-            "Zachgilbert\\LaravelVueMultiselect\\Tests\\": "tests/",
-            "Zachgilbert\\LaravelVueMultiselect\\": "src/"
+            "ZachGilbert\\VueMultiselectable\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZachGilbert\\VueMultiselectable\\Tests\\": "tests"
         }
     },
     "require": {
-        "laravel/framework": "^8.75"
+        "illuminate/support": "^8.75"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.10",
         "mockery/mockery": "^1.4.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ZachGilbert\\VueMultiselectable\\Providers\\CollectionProvider"
+            ]
+        }
     }
 }
