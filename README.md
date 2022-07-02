@@ -10,6 +10,8 @@ This package provides methods to conveniently convert PHP classes to array data 
 3. [Eloquent Collection Methods](#eloquent-collection-methods)
     - 3.1. [`multiselect()`](#eloquent-collection-methods.multiselect)
     - 3.2. [`disbaleOptionsBy()`](#eloquent-collection-methods.disable-options-by)
+4. [Eloquent Query Builder Methods](#query-builder-methods)
+    - 4.1. [`multiselect()`](#eloquent-query-builder-methods)
 
 <hr />
 
