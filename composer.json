@@ -11,8 +11,15 @@
     ],
     "autoload": {
         "psr-4": {
+            "Zachgilbert\\LaravelVueMultiselect\\Tests\\": "tests/",
             "Zachgilbert\\LaravelVueMultiselect\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "laravel/framework": "^8.75"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.10",
+        "mockery/mockery": "^1.4.4"
+    }
 }

@@ -1,7 +1,12 @@
 <?php
 
-namespace Zachgilbert\Traits;
+namespace Zachgilbert\LaravelVueMultiselect\Traits;
 
+/**
+ * trait CollectionProvider
+ *
+ * @package Zachgilbert\LaravelVueMultiselect\Traits
+ */
 trait VueMultiselectable
 {
     public function toMultipleSelect()
