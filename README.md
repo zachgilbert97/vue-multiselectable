@@ -124,7 +124,7 @@ The `disableOptionsBy()` method applies `$isDisabled = true` to each item in the
 <?php
 
 $options = $collection->disableOptionsBy(function ($item, $key) {
-    return substr($item->name, 0) === 'John';
+    return strpos($item->name, 'John') === 0;
 });
 
 $options->multiselect('id', 'name');
