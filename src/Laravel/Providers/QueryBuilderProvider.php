@@ -2,6 +2,7 @@
 
 namespace ZachGilbert\VueMultiselectable\Laravel\Providers;
 
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,22 +41,12 @@ class QueryBuilderProvider extends ServiceProvider
                 function (
                     string $trackBySelect,
                     string $labelSelect,
-                    string $trackByAlias = null,
-                    string $labelAlias = null
+                    string $trackByAlias = 'value',
+                    string $labelAlias = 'label'
                 ) {
-                    $query = $this;
-
-                    if (is_null($trackByAlias)) {
-                        $trackByAlias = 'value';
-                    }
-
-                    if (is_null($labelAlias)) {
-                        $labelAlias = 'label';
-                    }
-
-                    return $this->addSelect(
-                        \DB::raw("$trackBySelect AS `$trackByAlias`"),
-                        \DB::raw("$labelSelect AS `$labelAlias`")
+                    return $this->select(
+                        DB::raw("$trackBySelect AS `$trackByAlias`"),
+                        DB::raw("$labelSelect AS `$labelAlias`")
                     );
                 }
             );

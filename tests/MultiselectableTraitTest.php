@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use ZachGilbert\VueMultiselectable\Exceptions\DuplicateKeysException;
 use ZachGilbert\VueMultiselectable\Exceptions\MissingPropertyException;
 use ZachGilbert\VueMultiselectable\Traits\Multiselectable;
 
@@ -13,13 +14,13 @@ class MultiselectableTraitTest extends TestCase
         $this->assertTrue(method_exists($item, 'toMultiselectOption'));
     }
 
-    function test_class_missing_missing_track_by_attribute()
+    function test_class_missing_track_by_attribute()
     {
         $this->expectException(MissingPropertyException::class);
 
         $item = $this->getObjectForTrait(Multiselectable::class);
 
-        $item->toMultiselectOption();
+        $item->toMultiselectOption('id');
     }
 
     function test_class_missing_label_attribute()
@@ -190,5 +191,17 @@ class MultiselectableTraitTest extends TestCase
 
         $option = $item->toMultiselectOption('id', 'name', null, null, false);
         $this->assertArrayNotHasKey('$isDisabled', $option);
+    }
+
+    function test_same_keys_throws_exception()
+    {
+        $this->expectException(DuplicateKeysException::class);
+
+        $item = $this->getObjectForTrait(Multiselectable::class);
+        $item->id = 1;
+        $item->name = 'test';
+        $item->{'$isDisabled'} = true;
+
+        $option = $item->toMultiselectOption('id', 'name', 'foo', 'foo');
     }
 }

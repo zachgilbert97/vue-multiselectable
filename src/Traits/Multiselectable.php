@@ -2,6 +2,7 @@
 
 namespace ZachGilbert\VueMultiselectable\Traits;
 
+use ZachGilbert\VueMultiselectable\Exceptions\DuplicateKeysException;
 use ZachGilbert\VueMultiselectable\Exceptions\MissingPropertyException;
 
 /**
@@ -31,6 +32,12 @@ trait Multiselectable
         if (!isset($this->{$labelAttribute})) {
             throw new MissingPropertyException(
                 "Undefined property \"$labelAttribute\" on class" . get_class($this)
+            );
+        }
+
+        if ($trackByKey && $labelKey && $trackByKey === $labelKey) {
+            throw new DuplicateKeysException(
+                "Duplicate key \"$trackByKey\" encountered on multiselect option."
             );
         }
 
