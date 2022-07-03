@@ -12,6 +12,15 @@ use ZachGilbert\VueMultiselectable\Exceptions\MissingPropertyException;
  */
 trait Multiselectable
 {
+    /**
+     * @param  string  $trackByAttribute
+     * @param  string  $labelAttribute
+     * @param  string  $trackByKey
+     * @param  string  $labelKey
+     * @param  boolean $isDisabled
+     *
+     * @return mixed
+     */
     public function toMultiselectOption(
         string $trackByAttribute,
         string $labelAttribute = null,

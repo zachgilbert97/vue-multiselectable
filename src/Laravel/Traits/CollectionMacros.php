@@ -1,42 +1,29 @@
 <?php
 
-namespace ZachGilbert\VueMultiselectable\Laravel\Providers;
+namespace ZachGilbert\VueMultiselectable\Laravel\Traits;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Collection;
 use ZachGilbert\VueMultiselectable\Exceptions\NotMultiselectableException;
 use ZachGilbert\VueMultiselectable\Traits\Multiselectable;
 
 /**
- * class CollectionProvider
+ * trait CollectionMacros
  *
- * @package ZachGilbert\VueMultiselectable\Laravel\Providers
+ * @package ZachGilbert\VueMultiselectable\Laravel\Traits
  */
-class CollectionProvider extends ServiceProvider
+trait CollectionMacros
 {
-    /**
-     * @return void
-     */
-    public function boot()
-    {
-        $this->configureCollectionMacros();
-    }
-
     /**
      * Configure collection macros
      *
      * @return void
      */
-    protected function configureCollectionMacros(): void
-    {
-        $this->multiselectMacro();
-        $this->disableOptionsByMacro();
-    }
+    abstract protected function configureCollectionMacros();
 
     /**
      * @return void
      */
-    protected function multiselectMacro(): void
+    protected function multiselectCollectionMacro(): void
     {
         if (!method_exists(Collection::class, 'multiselect')) {
             Collection::macro('multiselect',
@@ -63,9 +50,9 @@ class CollectionProvider extends ServiceProvider
                             }
 
                             throw new NotMultiselectableException(
-                                'Item ' . get_class($item) .
-                                ' does not implement trait ' .
-                                Multiselectable::class
+                                'Collection item ' . get_class($item) .
+                                ' must use ' . Multiselectable::class .
+                                ' in order to use collection method multiselect().'
                             );
                         }
                     );
@@ -77,7 +64,7 @@ class CollectionProvider extends ServiceProvider
     /**
      * @return void
      */
-    protected function disableOptionsByMacro(): void
+    protected function disableOptionsByCollectionMacro(): void
     {
         if (!method_exists(Collection::class, 'disableOptionsBy')) {
             Collection::macro('disableOptionsBy',

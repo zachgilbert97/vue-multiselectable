@@ -1,40 +1,28 @@
 <?php
 
-namespace ZachGilbert\VueMultiselectable\Laravel\Providers;
+namespace ZachGilbert\VueMultiselectable\Laravel\Traits;
 
 use DB;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\ServiceProvider;
 
 /**
  * class QueryBuilderProvider
  *
- * @package ZachGilbert\VueMultiselectable\Laravel\Providers
+ * @package ZachGilbert\VueMultiselectable\Laravel\Traits
  */
-class QueryBuilderProvider extends ServiceProvider
+trait QueryBuilderMacros
 {
-    /**
-     * @return void
-     */
-    public function boot()
-    {
-        $this->configureQueryBuilderMacros();
-    }
-
     /**
      * Configure collection macros
      *
      * @return void
      */
-    protected function configureQueryBuilderMacros(): void
-    {
-        $this->multiselectMacro();
-    }
+    abstract protected function configureQueryBuilderMacros();
 
     /**
      * @return void
      */
-    protected function multiselectMacro(): void
+    protected function multiselectQueryBuilderMacro(): void
     {
         if (!method_exists(Builder::class, 'multiselect')) {
             Builder::macro('multiselect',
