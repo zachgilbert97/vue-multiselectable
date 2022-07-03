@@ -1,5 +1,5 @@
 # Vue Multiselect
-This package provides methods to conveniently convert PHP classes to array data prepared for use on the frontend Vue component, <a href="vue-multiselect.js.org">Vue Multiselect</a>.
+This package provides methods to conveniently convert PHP classes to array data prepared for use on the frontend Vue component, <a href="vue-multiselect.js.org">Vue Multiselect</a> (2.4.1).
 > Please note this utility package is independent of and not endorsed by https://vue-multiselect.js.org/.
 
 ## Table of Contents:
