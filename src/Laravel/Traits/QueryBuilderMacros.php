@@ -2,8 +2,8 @@
 
 namespace ZachGilbert\VueMultiselectable\Laravel\Traits;
 
-use DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Expression;
 
 /**
  * class QueryBuilderProvider
@@ -31,11 +31,10 @@ trait QueryBuilderMacros
                     string $labelSelect,
                     string $trackByAlias = 'value',
                     string $labelAlias = 'label'
-                ) {
-                    return $this->select(
-                        DB::raw("$trackBySelect AS `$trackByAlias`"),
-                        DB::raw("$labelSelect AS `$labelAlias`")
-                    );
+                ) {                    
+                    return $this
+                        ->selectRaw("$trackBySelect AS `$trackByAlias`")
+                        ->selectRaw("$labelSelect AS `$labelAlias`");
                 }
             );
         }
